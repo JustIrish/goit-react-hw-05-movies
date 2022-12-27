@@ -8,7 +8,7 @@ export const MoviesList = ({ movies }) => {
     <List>
       {movies.map(({ id, title, poster_path }) => (
         <ListItem key={id}>
-          <Link to={`movies/${id}`}>
+          <Link to={`/movies/${id}`}>
             <PosterImg
               src={`${IMG_URL}${poster_path}`}
               alt={title}
