@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 export const Container = styled.div`
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 16px;
 `;
 
 export const Header = styled.header`
@@ -30,4 +29,8 @@ export const StyledLink = styled(NavLink)`
   &.active {
     color: rgb(216 29 86);
   }
+`;
+
+export const Wrapper = styled.div`
+  padding: 16px 16px 30px;
 `;
