@@ -8,14 +8,20 @@ export const CastList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
+  align-items: baseline;
+  gap: 16px;
 `;
 
 export const CastItem = styled.li`
-  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 160px;
+  gap: 10px;
 
   p {
-    margin-top: 5px;
     font-size: 14px;
+    text-align: center;
   }
 `;

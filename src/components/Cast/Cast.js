@@ -21,7 +21,7 @@ export const Cast = () => {
   }, [movieId]);
 
   if (!cast) return;
-  if (cast.length === 0) return <p>No cast found for this movie</p>;
+  if (cast.length === 0) return <p>No cast found for this movie.</p>;
 
   return (
     <ListWrap>
@@ -32,7 +32,7 @@ export const Cast = () => {
               src={
                 profile_path
                   ? `${IMG_URL}${profile_path}`
-                  : 'https://www.shutterstock.com/image-vector/default-avatar-profile-icon-grey-260nw-1545687101.jpg'
+                  : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png'
               }
               alt={name}
               width={120}
