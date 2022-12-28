@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -12,10 +13,20 @@ export const Movies = () => {
   useEffect(() => {
     if (searchQuery === '') return setMovie([]);
 
-    getSearchMovies(searchQuery).then(res => {
-      console.log(res);
-      setMovie(res.results);
-    });
+    getSearchMovies(searchQuery)
+      .then(data => {
+        if (data.results.length === 0) {
+          toast.error(
+            'Sorry, there are no movies matching your search query. Please try again.'
+          );
+        }
+        console.log(data);
+        setMovie(data.results);
+      })
+      .catch(error => {
+        console.log(`${error.name}: ${error.message}`);
+        toast.error('Sorry, something went wrong...');
+      });
   }, [searchQuery]);
 
   const changeQuery = value => {

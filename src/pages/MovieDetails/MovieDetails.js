@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { getMovieById } from 'getMoviesApi';
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useParams } from 'react-router-dom';
@@ -14,7 +15,12 @@ export const MovieDetails = () => {
   const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
-    getMovieById(movieId).then(data => setMovie(data));
+    getMovieById(movieId)
+      .then(data => setMovie(data))
+      .catch(error => {
+        console.log(`${error.name}: ${error.message}`);
+        toast.error('Sorry, something went wrong...');
+      });
   }, [movieId]);
 
   if (!movie) return;
