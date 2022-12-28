@@ -6,12 +6,12 @@ import { getSearchMovies } from 'getMoviesApi';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 
 export const Movies = () => {
-  const [movie, setMovie] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('query') ?? '';
 
   useEffect(() => {
-    if (searchQuery === '') return setMovie([]);
+    if (searchQuery === '') return setMovies([]);
 
     getSearchMovies(searchQuery)
       .then(data => {
@@ -21,7 +21,7 @@ export const Movies = () => {
           );
         }
         console.log(data);
-        setMovie(data.results);
+        setMovies(data.results);
       })
       .catch(error => {
         console.log(`${error.name}: ${error.message}`);
@@ -36,7 +36,7 @@ export const Movies = () => {
   return (
     <main>
       <SearchBar onSubmit={changeQuery} />
-      <MoviesList movies={movie} />
+      {movies.length > 0 && <MoviesList movies={movies} />}
     </main>
   );
 };

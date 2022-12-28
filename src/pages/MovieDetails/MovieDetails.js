@@ -1,17 +1,22 @@
 import toast from 'react-hot-toast';
 import { getMovieById } from 'getMoviesApi';
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
+import { BackLink } from 'components/BackLink/BackLink';
 import {
   BackdropImg,
   CardMovie,
   PosterImage,
   MovieInfo,
+  AddInfo,
+  StyledLink,
 } from './MovieDetails.styled';
 
 export const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
   const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
@@ -32,6 +37,7 @@ export const MovieDetails = () => {
       <BackdropImg
         backdrop={`https://image.tmdb.org/t/p/w1280${backdrop_path}`}
       >
+        <BackLink to={backLinkHref}>Go back</BackLink>
         <CardMovie>
           <PosterImage
             src={`${IMG_URL}${poster_path}`}
@@ -40,25 +46,25 @@ export const MovieDetails = () => {
           />
           <MovieInfo>
             <h2>{title}</h2>
-            <p>User Score:{vote_average}%</p>
+            <p>User Score: {Math.round(vote_average * 10)}%</p>
             <h3>Owerview</h3>
             <p>{overview}</p>
             <h3>Genres</h3>
             <p>{genres ? genres.map(genre => genre.name).join(', ') : ''}</p>
           </MovieInfo>
         </CardMovie>
+        <AddInfo>
+          <h3>Additional information</h3>
+          <ul>
+            <li>
+              <StyledLink to={'cast'}>Cast</StyledLink>
+            </li>
+            <li>
+              <StyledLink to={'reviews'}>Reviews</StyledLink>
+            </li>
+          </ul>
+        </AddInfo>
       </BackdropImg>
-      <div>
-        <h3>Additional information</h3>
-        <ul>
-          <li>
-            <NavLink to={'cast'}>Cast</NavLink>
-          </li>
-          <li>
-            <NavLink to={'reviews'}>Reviews</NavLink>
-          </li>
-        </ul>
-      </div>
       <Outlet />
     </main>
   );
