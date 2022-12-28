@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import { CiSearch } from 'react-icons/ci';
+import toast from 'react-hot-toast';
 import { SearchForm, SearchInput, SearchBtn } from './SearchBar.styled';
 
 export const SearchBar = ({ onSubmit }) => {
@@ -6,7 +8,7 @@ export const SearchBar = ({ onSubmit }) => {
     evt.preventDefault();
     const query = evt.currentTarget.elements.input.value;
     if (query.trim() === '') {
-      console.log('Enter query');
+      toast.error('Please, enter your query!');
     }
     onSubmit(query);
     evt.currentTarget.reset();
@@ -20,4 +22,8 @@ export const SearchBar = ({ onSubmit }) => {
       </SearchBtn>
     </SearchForm>
   );
+};
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };

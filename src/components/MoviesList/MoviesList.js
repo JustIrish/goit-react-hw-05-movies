@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
 import { List, ListItem, PosterImg, MovieTitle } from './MoviesList.styled';
 
 export const MoviesList = ({ movies }) => {
@@ -20,4 +22,14 @@ export const MoviesList = ({ movies }) => {
       ))}
     </List>
   );
+};
+
+MoviesList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      poster_path: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
