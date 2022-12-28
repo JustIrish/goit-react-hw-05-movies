@@ -20,7 +20,6 @@ export const Movies = () => {
             'Sorry, there are no movies matching your search query. Please try again.'
           );
         }
-        console.log(data);
         setMovies(data.results);
       })
       .catch(error => {

@@ -20,3 +20,8 @@ export const getSearchMovies = async query => {
   const response = await axios.get(`search/movie?${params}&query=${query}`);
   return response.data;
 };
+
+export const getCastById = async movieId => {
+  const response = await axios.get(`movie/${movieId}/credits?${params}`);
+  return response.data;
+};
