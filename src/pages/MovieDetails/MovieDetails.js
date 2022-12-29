@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import { getMovieById } from 'getMoviesApi';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { BackLink } from 'components/BackLink/BackLink';
 import {
@@ -12,7 +12,7 @@ import {
   StyledLink,
 } from './MovieDetails.styled';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
@@ -40,7 +40,11 @@ export const MovieDetails = () => {
         <BackLink to={backLinkHref}>Go back</BackLink>
         <CardMovie>
           <PosterImage
-            src={`${IMG_URL}${poster_path}`}
+            src={
+              poster_path
+                ? `${IMG_URL}${poster_path}`
+                : 'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-768x1129.jpg'
+            }
             alt={title}
             loading="lazy"
           />
@@ -57,15 +61,23 @@ export const MovieDetails = () => {
           <h3>Additional information</h3>
           <ul>
             <li>
-              <StyledLink to={'cast'}>Cast</StyledLink>
+              <StyledLink to={'cast'} state={{ from: backLinkHref }}>
+                Cast
+              </StyledLink>
             </li>
             <li>
-              <StyledLink to={'reviews'}>Reviews</StyledLink>
+              <StyledLink to={'reviews'} state={{ from: backLinkHref }}>
+                Reviews
+              </StyledLink>
             </li>
           </ul>
         </AddInfo>
       </BackdropImg>
-      <Outlet />
+      <Suspense fallback={<div>Loading page...</div>}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
+
+export default MovieDetails;

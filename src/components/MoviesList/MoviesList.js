@@ -13,7 +13,11 @@ export const MoviesList = ({ movies }) => {
         <ListItem key={id}>
           <Link to={`/movies/${id}`} state={{ from: location }}>
             <PosterImg
-              src={`${IMG_URL}${poster_path}`}
+              src={
+                poster_path
+                  ? `${IMG_URL}${poster_path}`
+                  : 'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-768x1129.jpg'
+              }
               alt={title}
               loading="lazy"
             />

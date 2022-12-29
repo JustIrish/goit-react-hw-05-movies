@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ListWrap, CastList, CastItem } from './Cast.styled';
 
-export const Cast = () => {
+const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
   const IMG_URL = 'https://image.tmdb.org/t/p/w500';
@@ -45,3 +45,5 @@ export const Cast = () => {
     </ListWrap>
   );
 };
+
+export default Cast;
