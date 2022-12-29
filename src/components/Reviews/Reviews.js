@@ -20,19 +20,21 @@ const Reviews = () => {
   }, [movieId]);
 
   if (!reviews) return;
-  if (reviews.length === 0)
-    return <p>We don't have any reviews for this movie.</p>;
 
   return (
     <ListWrap>
-      <List>
-        {reviews.map(({ id, author, content }) => (
-          <li key={id}>
-            <b>Author: {author}</b>
-            <p>{content}</p>
-          </li>
-        ))}
-      </List>
+      {reviews.length > 0 ? (
+        <List>
+          {reviews.map(({ id, author, content }) => (
+            <li key={id}>
+              <b>Author: {author}</b>
+              <p>{content}</p>
+            </li>
+          ))}
+        </List>
+      ) : (
+        <p>We don't have any reviews for this movie.</p>
+      )}
     </ListWrap>
   );
 };

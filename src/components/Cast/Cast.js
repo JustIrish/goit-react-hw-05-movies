@@ -21,7 +21,6 @@ const Cast = () => {
   }, [movieId]);
 
   if (!cast) return;
-  if (cast.length === 0) return <p>No cast found for this movie.</p>;
 
   return (
     <ListWrap>
@@ -42,6 +41,7 @@ const Cast = () => {
           </CastItem>
         ))}
       </CastList>
+      {cast.length === 0 && <p>No cast found for this movie.</p>}
     </ListWrap>
   );
 };

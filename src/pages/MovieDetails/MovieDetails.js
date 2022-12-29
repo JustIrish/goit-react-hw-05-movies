@@ -3,6 +3,7 @@ import { getMovieById } from 'getMoviesApi';
 import { useState, useEffect, Suspense } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { BackLink } from 'components/BackLink/BackLink';
+import { Loader } from 'components/Loader/Loader';
 import {
   BackdropImg,
   CardMovie,
@@ -73,7 +74,7 @@ const MovieDetails = () => {
           </ul>
         </AddInfo>
       </BackdropImg>
-      <Suspense fallback={<div>Loading page...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </main>
