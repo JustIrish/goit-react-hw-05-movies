@@ -37,7 +37,7 @@ const Movies = () => {
 
   return (
     <main>
-      <SearchBar onSubmit={changeQuery} />
+      <SearchBar value={searchQuery} onSubmit={changeQuery} />
       {loading && <Loader />}
       {movies.length > 0 && <MoviesList movies={movies} />}
     </main>
