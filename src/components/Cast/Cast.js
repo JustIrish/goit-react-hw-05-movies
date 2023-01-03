@@ -6,15 +6,19 @@ import { ListWrap, CastList, CastItem } from './Cast.styled';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
   const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
+    setLoading(true);
     getCastById(movieId)
       .then(data => {
+        setLoading(false);
         setCast(data.cast);
       })
       .catch(error => {
+        setLoading(false);
         console.log(`${error.name}: ${error.message}`);
         toast.error('Sorry, something went wrong...');
       });
@@ -41,7 +45,7 @@ const Cast = () => {
           </CastItem>
         ))}
       </CastList>
-      {cast.length === 0 && <p>No cast found for this movie.</p>}
+      {cast.length === 0 && !loading && <p>No cast found for this movie.</p>}
     </ListWrap>
   );
 };
