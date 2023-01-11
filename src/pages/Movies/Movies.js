@@ -30,7 +30,7 @@ const Movies = () => {
         console.log(`${error.name}: ${error.message}`);
         toast.error('Sorry, something went wrong...');
       });
-  }, [searchQuery]);
+  }, [searchQuery, setSearchParams]);
 
   const changeQuery = value => {
     setSearchParams(value !== '' ? { query: value } : {});
